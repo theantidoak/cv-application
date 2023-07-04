@@ -1,0 +1,10 @@
+.sidebar {
+  width: 20rem;
+
+  &__profile-img-container {
+    border: 2px solid black;
+    border-radius: 50%;
+    height: 10rem;
+    width: 10rem;
+  }
+}
