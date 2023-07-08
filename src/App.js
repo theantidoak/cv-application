@@ -11,11 +11,15 @@ class App extends Component {
         editing: false,
       },
       contact: {
-        address: 'as',
+        address: '',
         number: '',
         email: '',
         website: '',
         editing: false
+      },
+      skill: {
+        skills: [''],
+        editing: false,
       }
     }
 
@@ -23,10 +27,24 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e, section) {
+  addToArray(e,section) {
+
+  }
+
+  handleChange(e, section, i=null) {
+    const propVal = this.state[section][e.currentTarget.dataset.prop];
+    let inputVal = e.currentTarget.value;
+    
+    if (Array.isArray(propVal)) {
+      const index = i ? i : +e.currentTarget.id.slice(e.currentTarget.id.indexOf('-') + 1);
+      propVal.splice(index, i ? 0 : 1, inputVal);
+      inputVal = propVal;
+    }
+
     this.setState({
-      [section]: { ...this.state[section], ...{ [e.currentTarget.id]: e.currentTarget.value } }
+      [section]: { ...this.state[section], ...{ [e.currentTarget.dataset.prop]: inputVal } }
     });
+
   }
 
   handleClick(section) {

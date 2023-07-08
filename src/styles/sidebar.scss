@@ -7,4 +7,14 @@
     height: 10rem;
     width: 10rem;
   }
+
+  .fields {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+
+    &__descriptor {
+      width: 10rem;
+    }
+  }
 }

@@ -1,7 +1,10 @@
 export const Description = (props) => {
-  const { id, propValue } = props;
+  const { propName, propValue } = props;
 
   return (
-    <p><span>{id}: </span><span>{propValue}</span></p>
+    <p className="fields">
+      <span className="fields__descriptor">{propName}: </span>
+      <span className="fields__value">{propValue}</span>
+    </p>
   )
 }
