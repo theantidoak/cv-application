@@ -62,18 +62,48 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e, section, i=null) {
-    const propVal = this.state[section][e.currentTarget.dataset.prop];
-    if (Array.isArray(propVal)) {
-      const index = i ? i : +e.currentTarget.id.slice(e.currentTarget.id.indexOf('-') + 1);
-      propVal.splice(index, i ? 0 : 1, typeof propVal[0] === 'object' ? { ...propVal[0] } : propVal[0].slice());
+  updateValue(obj, properties, target, i) {
+    const [current, ...property] = properties.split('.');
+
+    if (Array.isArray(obj)) {
+      const index = i ? i - 1 : +target.id.slice(target.id.lastIndexOf('-') + 1);
+      if (property.length < 1 && obj[index].hasOwnProperty(current)) {
+
+        obj.splice(i ? index + 1 : index,
+          i ? 0 : 1, 
+          {
+            ...obj[index],
+            [current]: i ? '' : target.value
+          });
+
+        return obj;
+      }
+
+      return {
+        ...obj[index],
+        [current]: this.updateValue(obj[index][current], property.join('.'), target, i)
+      }
     }
-    const inputVal = Array.isArray(propVal) ? propVal : e.currentTarget.value;
+
+    if (property.length < 1 && obj.hasOwnProperty(current)) {
+      return {
+        ...obj,
+        [current]: i ? '' : target.value
+      };
+    }
+
+    return {
+      ...obj,
+      [current]: this.updateValue(obj[current], property.join('.'), target, i)
+    }
+  }
+
+  handleChange(e, section, i=null) {
+    const properties = e.currentTarget.dataset.prop;
 
     this.setState({
-      [section]: { ...this.state[section], ...{ [e.currentTarget.dataset.prop]: inputVal } }
+      [section]: { ...this.updateValue(this.state[section], properties, e.currentTarget, i) }
     });
-
   }
 
   handleClick(section) {

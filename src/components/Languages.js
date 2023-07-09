@@ -11,10 +11,10 @@ export const Languages = (props) => {
   return (
     <div className="sidebar__languages-container">
       <h2>Languages</h2>
-      {language.editing && list}
+      {!language.editing && list}
       <form className="sidebar__language-form" action="" onSubmit={(e) => e.preventDefault()}>
         {language.editing && inputs}
-        {language.editing ? <button value="" data-prop="languages" onClick={(e) => handleChange(e, 'language', language.languages.length)}>Add language</button> : ''}
+        {language.editing && <button value="" data-prop="languages" onClick={(e) => handleChange(e, 'language', language.languages.length)}>Add language</button>}
         <Button handleClick={() => handleClick('language')} editing={language.editing} />
       </form>
     </div>
