@@ -11,8 +11,9 @@ export const Contact = (props) => {
 
   return (
     <div className="sidebar__contact-container">
+      {!contact.editing && descriptions}
       <form className="sidebar__contact-form" action="" onSubmit={(e) => e.preventDefault()}>
-        {contact.editing ? inputs : descriptions}
+        {contact.editing && inputs}
         <Button handleClick={() => handleClick('contact')} editing={contact.editing} />
       </form>
     </div>

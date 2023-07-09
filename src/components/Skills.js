@@ -11,9 +11,10 @@ export const Skills = (props) => {
   return (
     <div className="sidebar__skills-container">
       <h2>Skills</h2>
+      {!skill.editing && list}
       <form className="sidebar__skill-form" action="" onSubmit={(e) => e.preventDefault()}>
-        {skill.editing ? inputs : list}
-        {skill.editing ? <button value="" data-prop="skills" onClick={(e) => handleChange(e, 'skill', skill.skills.length)}>Add Skill</button> : ''}
+        {skill.editing && inputs}
+        {skill.editing && <button value="" data-prop="skills" onClick={(e) => handleChange(e, 'skill', skill.skills.length)}>Add Skill</button>}
         <Button handleClick={() => handleClick('skill')} editing={skill.editing} />
       </form>
     </div>
