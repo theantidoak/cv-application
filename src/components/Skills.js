@@ -4,7 +4,12 @@ import { Input } from "./Input";
 export const Skills = (props) => {
 
   const { skill, handleClick, handleChange } = props;
-  const inputs = skill.skills.map((sk, i) => <Input value={sk} key={"skills-" + i} id={"skills-" + i} propName='skills' handleChange={(e) => handleChange(e, 'skill')} />)
+  const inputs = skill.skills.map((sk, i) => {
+    return <div key={"skills-" + i}>
+      <Input value={sk} id={"skills-" + i} propName='skills' handleChange={(e) => handleChange(e, 'skill')} />
+      <button id={"skills-btn-" + i} data-prop='skills' onClick={(e) => handleChange(e, 'skill', null, true)}>x</button>
+    </div>
+  })
   const listItems = skill.skills.map((sk, i) => <li id={'skill-' + i} key={'skill-' + i}>{sk}</li>)
   const list = <ul>{listItems}</ul>
 

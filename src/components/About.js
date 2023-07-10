@@ -10,7 +10,7 @@ export const About = (props) => {
 
   return (
     <div>
-      {about.editing && (
+      {!about.editing && (
           <div>
             <h2>{about.name}</h2>
             <h3>{about.position}</h3>

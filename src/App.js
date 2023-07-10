@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { Mainpage } from './components/Mainpage';
+import './styles/styles.scss';
 
 class App extends Component {
   constructor(props) {
@@ -12,34 +13,34 @@ class App extends Component {
         editing: false
       },
       contact: {
-        address: '',
-        number: '',
-        email: '',
-        website: '',
+        address: '1 Example Address',
+        number: '(xxx) xxx - xxxx',
+        email: 'example@example.com',
+        website: 'www.example.com',
         editing: false
       },
       skill: {
-        skills: [''],
+        skills: ['skill 1', 'skill 2', 'skill 3'],
         editing: false
       },
       language: {
-        languages: [''],
+        languages: ['English', 'French', 'Spanish'],
         editing: false
       },
       about: {
-        name: '',
-        position: '',
-        description: '',
+        name: 'Your Name',
+        position: 'Your Position',
+        description: 'About You',
         editing: false
       },
       education: {
         schools: [
           {
-            dates: '',
-            degree: '',
-            school: '',
-            location: '',
-            awards: ''
+            dates: '2012 - 2016',
+            degree: 'Your Degree',
+            school: 'Your School',
+            location: 'City',
+            awards: 'Awards/Minor'
           }
         ],
         editing: false
@@ -47,11 +48,11 @@ class App extends Component {
       experience: {
         jobs: [
           {
-            dates: '',
-            position: '',
-            company: '',
-            location: '',
-            description: ''
+            dates: '2016 - 2018',
+            position: 'Your Position',
+            company: 'Your Company',
+            location: 'City',
+            description: 'Your Responsibilities'
           }
         ],
         editing: false
@@ -62,20 +63,31 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  updateValue(obj, properties, target, i) {
+  updateValue(obj, properties, target, i, remove) {
     const [current, ...property] = properties.split('.');
 
-    if (Array.isArray(obj)) {
-      const index = i ? i - 1 : +target.id.slice(target.id.lastIndexOf('-') + 1);
+    if (remove) {
+      const index = +target.id.slice(target.id.lastIndexOf('-') + 1);
+      obj[current].splice(index, 1);
+      return obj;
+    }
+
+    if (i) {
+      const newObj = typeof obj[current][0] === "object" ? Object.fromEntries(Object.entries(obj[current][0]).map(([key]) => [key, ''])) : '';
+      obj[current].splice(obj[current].length, 0, newObj);
+      return obj;
+    }
+
+    if (Array.isArray(obj) || (property.length < 1 && Array.isArray(obj[current]))) {
+      const index = +target.id.slice(target.id.lastIndexOf('-') + 1);
+
+      if (property.length < 1 && Array.isArray(obj[current])) {
+        obj[current].splice(obj[current][index], 1, target.value);
+        return obj;
+      }
+
       if (property.length < 1 && obj[index].hasOwnProperty(current)) {
-
-        obj.splice(i ? index + 1 : index,
-          i ? 0 : 1, 
-          {
-            ...obj[index],
-            [current]: i ? '' : target.value
-          });
-
+        obj.splice(index, 1, { ...obj[index], [current]: target.value })
         return obj;
       }
 
@@ -88,7 +100,7 @@ class App extends Component {
     if (property.length < 1 && obj.hasOwnProperty(current)) {
       return {
         ...obj,
-        [current]: i ? '' : target.value
+        [current]: target.value
       };
     }
 
@@ -98,11 +110,11 @@ class App extends Component {
     }
   }
 
-  handleChange(e, section, i=null) {
+  handleChange(e, section, i=null, remove=null) {
     const properties = e.currentTarget.dataset.prop;
 
     this.setState({
-      [section]: { ...this.updateValue(this.state[section], properties, e.currentTarget, i) }
+      [section]: { ...this.updateValue(this.state[section], properties, e.currentTarget, i, remove) }
     });
   }
 

@@ -4,7 +4,12 @@ import { Input } from "./Input";
 export const Languages = (props) => {
 
   const { language, handleClick, handleChange } = props;
-  const inputs = language.languages.map((la, i) => <Input value={la} key={"languages-" + i} id={"languages-" + i} propName='languages' handleChange={(e) => handleChange(e, 'language')} />)
+  const inputs = language.languages.map((la, i) => {
+    return <div key={"languages-" + i}>
+      <Input value={la} id={"languages-" + i} propName='languages' handleChange={(e) => handleChange(e, 'language')} />
+      <button id={"languages-btn-" + i} data-prop='languages' onClick={(e) => handleChange(e, 'language', null, true)}>x</button>
+    </div>
+  })
   const listItems = language.languages.map((la, i) => <li id={'language-' + i} key={'language-' + i}>{la}</li>)
   const list = <ul>{listItems}</ul>
 
