@@ -43,6 +43,7 @@ class App extends Component {
             awards: 'Awards/Minor'
           }
         ],
+        keys: ['dates', 'degree', 'school', 'location', 'awards'],
         editing: false
       },
       experience: {
@@ -55,6 +56,7 @@ class App extends Component {
             description: 'Your Responsibilities'
           }
         ],
+        keys: ['dates', 'position', 'company', 'location', 'description'],
         editing: false
       }
     }
@@ -72,8 +74,8 @@ class App extends Component {
       return obj;
     }
 
-    if (i) {
-      const newObj = typeof obj[current][0] === "object" ? Object.fromEntries(Object.entries(obj[current][0]).map(([key]) => [key, ''])) : '';
+    if (i != null) {
+      const newObj = obj.keys ? Object.fromEntries(obj.keys.map((key) => [key, ''])) : '';
       obj[current].splice(obj[current].length, 0, newObj);
       return obj;
     }

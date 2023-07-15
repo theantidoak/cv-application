@@ -7,6 +7,38 @@
 .sidebar {
   width: 200px;
   padding: 0 1.5rem;
+
+  &__profile-img-container {
+    border: 2px solid black;
+    border-radius: 50%;
+    height: 10rem;
+    width: 10rem;
+    margin: 0 auto;
+  }
+
+  &__contact-container {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    margin-top: 1rem;
+  }
+
+  &__contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+  }
+
+  .fields {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    margin: 0;
+
+    &__descriptor {
+      width: 1rem;
+    }
+  }
 }
 
 .mainpage {

@@ -3,7 +3,7 @@ export const Description = (props) => {
 
   return (
     <p className="fields">
-      <span className="fields__descriptor">{propName}: </span>
+      {propName}
       <span className="fields__value">{propValue}</span>
     </p>
   )

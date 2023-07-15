@@ -12,10 +12,9 @@ export const Education = (props) => {
   let forms = [];
   for (let i = 0; i < inputs.length / 5; i++) {
     forms.push(
-      <form className="sidebar__experience-form" action="" onSubmit={(e) => e.preventDefault()}>
+      <form key={'form-education-' + i} className="sidebar__experience-form" action="" onSubmit={(e) => e.preventDefault()}>
         {inputs.slice(i, i + 5)}
         <button id={"schools-btn-" + i} data-prop='schools' onClick={(e) => handleChange(e, 'education', null, true)}>Remove School</button>
-        <button value="" data-prop="schools" onClick={(e) => handleChange(e, 'education', education.schools.length)}>Add School</button>
       </form>
     )
   }
@@ -24,6 +23,7 @@ export const Education = (props) => {
     <div className="sidebar__education-container">
       <h2>Education</h2>
       {education.editing ? forms : list}
+      {education.editing && <button value="" data-prop="schools" onClick={(e) => handleChange(e, 'education', education.schools.length)}>Add School</button>}
       <Button handleClick={() => handleClick('education')} editing={education.editing} />
     </div>
   )

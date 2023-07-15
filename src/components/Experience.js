@@ -13,10 +13,9 @@ export const Experience = (props) => {
 
   for (let i = 0; i < inputs.length / 5; i++) {
     forms.push(
-      <form className="sidebar__experience-form" action="" onSubmit={(e) => e.preventDefault()}>
+      <form key={'form-experience-' + i} className="sidebar__experience-form" action="" onSubmit={(e) => e.preventDefault()}>
         {inputs.slice(i, i + 5)}
         <button id={"jobs-btn-" + i} data-prop='jobs' onClick={(e) => handleChange(e, 'experience', null, true)}>Remove Job</button>
-        <button value="" data-prop="jobs" onClick={(e) => handleChange(e, 'experience', experience.jobs.length)}>Add Job</button>
       </form>
     )
   }
@@ -25,6 +24,7 @@ export const Experience = (props) => {
     <div className="sidebar__experience-container">
       <h2>Experience</h2>
       {experience.editing ? forms : list} 
+      {experience.editing && <button value="" data-prop="jobs" onClick={(e) => handleChange(e, 'experience', experience.jobs.length)}>Add Job</button>}
       <Button handleClick={() => handleClick('experience')} editing={experience.editing} />
     </div>
   )

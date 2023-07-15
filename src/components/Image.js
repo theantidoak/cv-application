@@ -1,4 +1,3 @@
-import '../styles/sidebar.scss';
 import { Button } from './Button';
 
 export const Image = (props) => {
