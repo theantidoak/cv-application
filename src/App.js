@@ -36,27 +36,28 @@ class App extends Component {
       education: {
         schools: [
           {
+            degree: 'Degree',
+            school: 'School',
+            location: 'Location',
             dates: '2012 - 2016',
-            degree: 'Your Degree',
-            school: 'Your School',
-            location: 'City',
-            awards: 'Awards/Minor'
+            awards: 'Awards'
           }
         ],
-        keys: ['dates', 'degree', 'school', 'location', 'awards'],
+        keys: ['degree', 'school', 'location', 'dates', 'awards'],
         editing: false
       },
       experience: {
         jobs: [
           {
-            dates: '2016 - 2018',
-            position: 'Your Position',
+            
             company: 'Your Company',
-            location: 'City',
+            position: 'Your Position',
+            location: 'Location',
+            dates: '2016 - 2018',
             description: 'Your Responsibilities'
           }
         ],
-        keys: ['dates', 'position', 'company', 'location', 'description'],
+        keys: ['company', 'position',  'location', 'dates', 'description'],
         editing: false
       }
     }
@@ -84,7 +85,7 @@ class App extends Component {
       const index = +target.id.slice(target.id.lastIndexOf('-') + 1);
 
       if (property.length < 1 && Array.isArray(obj[current])) {
-        obj[current].splice(obj[current][index], 1, target.value);
+        obj[current].splice(index, 1, target.value);
         return obj;
       }
 

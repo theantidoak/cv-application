@@ -11,7 +11,7 @@ export const Languages = (props) => {
     </div>
   })
   const listItems = language.languages.map((la, i) => <li id={'language-' + i} key={'language-' + i}>{la}</li>)
-  const list = <ul>{listItems}</ul>
+  const list = <ul className="sidebar__list">{listItems}</ul>
 
   return (
     <div className="sidebar__languages-container">

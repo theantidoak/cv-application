@@ -1,6 +1,7 @@
 .App {
   display: flex;
   width: 800px;
+  height: 1200px;
   margin: 0 auto;
 }
 
@@ -39,9 +40,70 @@
       width: 1rem;
     }
   }
+
+  &__list {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .mainpage {
   width: 600px;
   padding: 0 1.5rem;
+
+  h2 {
+    margin-bottom: 0;
+  }
+
+  &__form {
+    padding: 0;
+    list-style: none;
+
+    li.education:first-child {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    li.education:nth-of-type(2) {
+      font-size: 18px;
+      font-style: italic;
+    }
+
+    li.education:nth-of-type(3)::after {
+      content: '/';
+      padding: 0 .25rem;
+    }
+
+    li.education:nth-of-type(3), li.education:nth-of-type(4) {
+      display: inline-block;
+      font-size: 14px;
+    }
+
+    li.education:nth-of-type(5) {
+      font-size: 14px;
+    }
+
+    li.experience:first-child {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    li.experience:nth-of-type(2) {
+      font-size: 18px;
+      font-style: italic;
+    }
+
+
+    li.experience:nth-of-type(3), li.experience:nth-of-type(4) {
+      display: inline-block;
+      font-size: 14px;
+    }
+
+    li.experience:nth-of-type(3)::after {
+      content: '/';
+      padding: 0 .25rem;
+    }
+  }
 }

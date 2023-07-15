@@ -11,7 +11,7 @@ export const Skills = (props) => {
     </div>
   })
   const listItems = skill.skills.map((sk, i) => <li id={'skill-' + i} key={'skill-' + i}>{sk}</li>)
-  const list = <ul>{listItems}</ul>
+  const list = <ul className="sidebar__list">{listItems}</ul>
 
   return (
     <div className="sidebar__skills-container">
